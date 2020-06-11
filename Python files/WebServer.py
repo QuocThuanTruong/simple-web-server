@@ -18,7 +18,7 @@ class WebServer:
         self._host = socket.gethostname() 
         self._addr = socket.gethostbyname(self._host)
         self._port =  port
-        self._directory = '.\\'              #Current dir stored server files
+        self._server_directory = '.\\'              #Current dir stored server files
 
     """
     Create socket server using IPv4 and TCP.
@@ -56,7 +56,7 @@ class WebServer:
         while True:
             (client_socket, client_addr) = self._server_socket.accept()
             print(f"Connection from {client_addr} has been established.")
-            threading.Thread(target = self._handle_method, args = (client_socket, client_addr)).start()
+            threading.Thread(target = self._handle_client_request, args = (client_socket, client_addr)).start()
 
     """
     Get client request and handle, reponse it.
@@ -64,7 +64,10 @@ class WebServer:
         client_socket   client that server accepted.
         client_addr     address of client (IP, port).
     """
-    def _handle_method(self, client_socket, client_addr):
+    def _handle_client_request(self, client_socket, client_addr):
+        PACKET_SIZE = 4096
+
+        
 
         pass
 
@@ -93,7 +96,7 @@ class WebServer:
         cur_time = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
         header += f"Date: {cur_time}\r\n"
         header += f"Server: {SERVER_NAME}\r\n"
-        header += "Connection: close\r\n"
+        header += "Connection: keep-alive\r\n"
         
         return header
 
