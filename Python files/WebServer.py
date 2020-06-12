@@ -67,7 +67,7 @@ class WebServer:
     def _handle_client_request(self, client_socket, client_addr):
         PACKET_SIZE = 4096
 
-        
+
 
         pass
 
@@ -96,7 +96,7 @@ class WebServer:
         cur_time = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
         header += f"Date: {cur_time}\r\n"
         header += f"Server: {SERVER_NAME}\r\n"
-        header += "Connection: keep-alive\r\n"
+        header += "Connection: keep-alive\r\n\n"
         
         return header
 
