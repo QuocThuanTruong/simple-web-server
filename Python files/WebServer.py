@@ -79,22 +79,21 @@ class WebServer:
         if method_request == "GET":
             file_requested = data.split(' ')[1]
             file_requested = file_requested.split('?')[0]
-            if file_requested[0] == '/':
+            if file_requested[0] == '/index.html':
                 file_requested = "index.html" 
 
         #open file_requested to get data_response and create response_header
         try:
             file_serve_client = self._server_directory + file_requested
             file_response_client = open(file_serve_client,'rb')
-            data_response = file_response_client.read(1)
+            data_response = file_response_client.read()
             response_header = self._create_response_header(200)
+            file_response_client.close()
         except OSError:
             response_header = self._create_response_header(404)
             file_404 = open(self._server_directory + "404.html",'rb')
-            data_response = file_404.read(1) 
+            data_response = file_404.read() 
             file_404.close()
-        finally:
-            file_response_client.close()
         
         #Response_to_client = response_header + data_response
         Response_to_client = response_header.encode()
