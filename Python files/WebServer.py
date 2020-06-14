@@ -74,7 +74,7 @@ class WebServer:
         if not data:
             return
 
-        #Split data to get file_requested
+        #Split data to find file_requested
         method_request = data.split(' ')[0]
         if method_request == "GET":
             file_requested = data.split(' ')[1]
