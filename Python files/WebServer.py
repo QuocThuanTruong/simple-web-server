@@ -73,13 +73,12 @@ class WebServer:
         #Not exist data -> end func _handle_client_request
         if not data:
             return
-
         #Split data to find file_requested
         method_request = data.split(' ')[0]
         if method_request == "GET":
             file_requested = data.split(' ')[1]
             file_requested = file_requested.split('?')[0]
-            if file_requested[0] == '/index.html':
+            if file_requested == '/index.html' or file_requested == '/':
                 file_requested = "index.html" 
 
         #Open file_requested to get data_response and create response_header
