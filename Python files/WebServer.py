@@ -67,14 +67,14 @@ class WebServer:
     def _handle_client_request(self, client_socket, client_addr):
         PACKET_SIZE = 4096
 
-        #receive data from client_socket
+        #Receive data from client_socket
         data = client_socket.recv(PACKET_SIZE,0).decode()
 
         #Not exist data -> end func _handle_client_request
         if not data:
             return
 
-        #split data to get file_requested
+        #Split data to get file_requested
         method_request = data.split(' ')[0]
         if method_request == "GET":
             file_requested = data.split(' ')[1]
@@ -82,7 +82,7 @@ class WebServer:
             if file_requested[0] == '/index.html':
                 file_requested = "index.html" 
 
-        #open file_requested to get data_response and create response_header
+        #Open file_requested to get data_response and create response_header
         try:
             file_serve_client = self._server_directory + file_requested
             file_response_client = open(file_serve_client,'rb')
@@ -99,10 +99,10 @@ class WebServer:
         Response_to_client = response_header.encode()
         Response_to_client += data_response
 
-        #send data to client
+        #Send data to client
         client_socket.send(Response_to_client)
 
-        #close connection
+        #Close connection
         client_socket.close()
 
         pass
