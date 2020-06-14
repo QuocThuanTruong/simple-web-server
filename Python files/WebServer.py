@@ -18,7 +18,7 @@ class WebServer:
         self._host = socket.gethostname() 
         self._addr = socket.gethostbyname(self._host)
         self._port =  port
-        self._server_directory = '.\\'              #Current dir stored server files
+        self._server_directory = 'D:\\Deadlines\\Semester II_2\\MMT\\TH\\De_bai_Socket_CQ\\Work\\Web Server\\HTML files'              #Current dir stored server files
 
     """
     Create socket server using IPv4 and TCP.
@@ -67,42 +67,43 @@ class WebServer:
     def _handle_client_request(self, client_socket, client_addr):
         PACKET_SIZE = 4096
 
-        #receive data from client_socket
-        data = client_socket.recv(PACKET_SIZE,0).decode()
+        data = client_socket.recv(PACKET_SIZE).decode()                                 #Receive data from client_socket
 
         #Not exist data -> end func _handle_client_request
         if not data:
             return
 
-        #split data to get file_requested
+        #Split data to get file_requested
         method_request = data.split(' ')[0]
+
         if method_request == "GET":
             file_requested = data.split(' ')[1]
-            file_requested = file_requested.split('?')[0]
-            if file_requested[0] == '/index.html':
-                file_requested = "index.html" 
+            file_requested = file_requested.split('?')[0]                               #Ignore ?xxx
 
-        #open file_requested to get data_response and create response_header
+            if file_requested == '/':
+                file_requested = "/index.html" 
+
+        #Open file_requested to get data_response and create response_header
         try:
-            file_serve_client = self._server_directory + file_requested
-            file_response_client = open(file_serve_client,'rb')
+            file_response_client = open(self._server_directory + file_requested, 'rb')
             data_response = file_response_client.read()
             response_header = self._create_response_header(200)
+            
+        except:
+            file_response_client = open(self._server_directory + "/404.html", 'rb')
+            data_response = file_response_client.read()
+            response_header = self._create_response_header(404) 
+
+        finally:
             file_response_client.close()
-        except OSError:
-            response_header = self._create_response_header(404)
-            file_404 = open(self._server_directory + "404.html",'rb')
-            data_response = file_404.read() 
-            file_404.close()
         
-        #Response_to_client = response_header + data_response
-        Response_to_client = response_header.encode()
-        Response_to_client += data_response
+        #Send response to client include header + data
+        response_to_client = response_header.encode()
+        response_to_client += data_response
 
-        #send data to client
-        client_socket.send(Response_to_client)
+        client_socket.send(response_to_client)
 
-        #close connection
+        #Close connection
         client_socket.close()
 
         pass
@@ -132,7 +133,7 @@ class WebServer:
         cur_time = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
         header += f"Date: {cur_time}\r\n"
         header += f"Server: {SERVER_NAME}\r\n"
-        header += "Connection: keep-alive\r\n"
+        header += "Connection: keep-alive\r\n\n"
         
         return header
 
