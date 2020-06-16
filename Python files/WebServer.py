@@ -1,6 +1,7 @@
 import socket
 import time
 import threading
+import re
 
 """
 Simple HTTP Web Server.
@@ -65,6 +66,8 @@ class WebServer:
         client_addr     address of client (IP, port).
     """
     def _handle_client_request(self, client_socket, client_addr):
+        DEFAULT_USERNAME = "admin"
+        DEFAULT_PASSWORD = "admin"
         PACKET_SIZE = 4096
 
         data = client_socket.recv(PACKET_SIZE).decode()                                 #Receive data from client_socket
@@ -78,17 +81,24 @@ class WebServer:
 
         if method_request == "GET":
             file_requested = data.split(' ')[1]
-            file_requested = file_requested.split('?')[0]                               #Ignore ?xxx
+            file_requested = file_requested.split('?')[0]                               #Ignore ?xxx if have
 
             if file_requested == '/':
                 file_requested = "/index.html" 
-
+        elif method_request == "POST":
+            #Implements here
+            pass
+                    
         #Open file_requested to get data_response and create response_header
         try:
-            file_response_client = open(self._server_directory + file_requested, 'rb')
-            data_response = file_response_client.read()
-            response_header = self._create_response_header(200)
-            
+            if method_request == "GET":
+                file_response_client = open(self._server_directory + file_requested, 'rb')
+                data_response = file_response_client.read()
+                response_header = self._create_response_header(200)
+            elif method_request == "POST":
+                #Implements here
+                pass
+
         except:
             file_response_client = open(self._server_directory + "/404.html", 'rb')
             data_response = file_response_client.read()
@@ -105,8 +115,6 @@ class WebServer:
 
         #Close connection
         client_socket.close()
-
-        pass
 
     """
     Create HTTP general header - applying to both requests and responses (no relation to data).
@@ -133,11 +141,10 @@ class WebServer:
         cur_time = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
         header += f"Date: {cur_time}\r\n"
         header += f"Server: {SERVER_NAME}\r\n"
-        header += "Connection: keep-alive\r\n\n"
+        header += "Connection: close\r\n\n"
         
         return header
 
 if __name__ == "__main__":
     web_server = WebServer(80)
     web_server.create()
-
