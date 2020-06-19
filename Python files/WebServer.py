@@ -86,7 +86,10 @@ class WebServer:
             if file_requested == '/':
                 file_requested = "/index.html" 
         elif method_request == "POST":
-            #Implements here
+            pattern = r"(?:username=)(?P<username>.+)(?:&password=)(?P<password>.+)"
+            match = re.search(pattern, data)
+            if match.group("username") == DEFAULT_USERNAME and match.group("password") == DEFAULT_PASSWORD:   
+                file_requested = "/info.html" #chỗ này có cần làm ngược lai hong anh làm ngược lại là sao hả em nè
             pass
                     
         #Open file_requested to get data_response and create response_header
@@ -96,7 +99,9 @@ class WebServer:
                 data_response = file_response_client.read()
                 response_header = self._create_response_header(200)
             elif method_request == "POST":
-                #Implements here
+                file_response_client = open(self._server_directory + file_requested, 'rb')
+                data_response = file_response_client.read()
+                response_header = self._create_response_header(301)
                 pass
 
         except:
