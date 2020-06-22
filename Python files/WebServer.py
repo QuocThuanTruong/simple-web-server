@@ -19,7 +19,7 @@ class WebServer:
         self._host = socket.gethostname() 
         self._addr = socket.gethostbyname(self._host)
         self._port =  port
-        self._server_directory = 'D:\\Nam2\\HKII\\MMT\\ThucHanh\\Socketio\\Web-Server\\HTML files'              #Current dir stored server files
+        self._server_directory = 'D:\\Deadlines\\Semester II_2\\MMT\\TH\\De_bai_Socket_CQ\\Work\\Web Server\\HTML files'              #Current dir stored server files
 
     """
     Create socket server using IPv4 and TCP.
@@ -88,8 +88,14 @@ class WebServer:
         elif method_request == "POST":
             pattern = r"(?:username=)(?P<username>.+)(?:&password=)(?P<password>.+)"
             match = re.search(pattern, data)
-            if match.group("username") == DEFAULT_USERNAME and match.group("password") == DEFAULT_PASSWORD:   
-                file_requested = "/info.html" #chỗ này có cần làm ngược lai hong anh làm ngược lại là sao hả em nè
+            
+            if match:
+                if match.group("username") == DEFAULT_USERNAME and match.group("password") == DEFAULT_PASSWORD:   
+                    file_requested = "/info.html"
+                    location = "info.html"
+                else:
+                    file_requested = "/404.html"
+                    location = "404.html"
             pass
                     
         #Open file_requested to get data_response and create response_header
@@ -101,7 +107,7 @@ class WebServer:
             elif method_request == "POST":
                 file_response_client = open(self._server_directory + file_requested, 'rb')
                 data_response = file_response_client.read()
-                response_header = self._create_response_header(301)
+                response_header = self._create_response_header(301, location)
                 pass
 
         except:
@@ -127,7 +133,7 @@ class WebServer:
     @params
         response_code   HTTP response code in header
     """
-    def _create_response_header(self, response_code):
+    def _create_response_header(self, response_code, location = None):
         SERVER_NAME = 'Python.Webserver'
         HTTP_200_HEADER = 'HTTP/1.1 200 OK\r\n'
         HTTP_301_HEADER = 'HTTP/1.1 301 Moved Permanently\r\n'
@@ -141,6 +147,10 @@ class WebServer:
             header += HTTP_301_HEADER
         elif response_code == 404:
             header += HTTP_404_HEADER
+        
+        #Add location if have
+        if location:
+            header += f"Location: /{location}\n"
         
         #Format time stamp: dWeek, dMonth month year hh:MM:ss 
         cur_time = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
