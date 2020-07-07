@@ -2,7 +2,7 @@ html, body {
     height: 100%;
 }
 
-html, body, div, h1, h2, a, p, fieldset, form, label {
+html, body, div, h1, h2, h3, fieldset, form, label {
     border: 0;
     font-family: inherit;
     font-size: 100%;
@@ -18,196 +18,108 @@ body {
     font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 62.5%;
     color: #0d0c22;
-    background: #fff;
+    background: #3a2e65;
     padding: 0;
     margin: 0;
+    overflow: hidden;   
 }
 
-@media (min-width: 960px) {
-    #main-container {
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        overflow: hidden;
-    }
+.grass {
+    background-image: url(./assets/ontop-grass.png);
+    bottom: 0;
+    right: 0;
+    padding-right: 80px;
+    position: absolute;
+    width: 708px;
+    height: 243px;
+    z-index: 2;
 }
 
-@media (min-width: 960px) {
-    .sidebar {
-        width: 450px;
-        flex-grow: 0;
-        background: #f1cdd7;
-        color: #865c6c;
-    }
+@keyframes vibrate { 
+    50% { 
+      transform: rotate(-1deg); 
+      transform: scaleY(1.05)
+    } 
+    100% { 
+      transform: rotate(1deg); 
+    } 
 }
 
-.sidebar {
-    position: relative;
+.grass {
+    animation:vibrate 2.5s linear infinite;
 }
 
-@media (min-width: 960px) {
-    .sidebar 
-    .sidebar-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-    }
-}
-
-@media (min-width: 960px) {
-    .sidebar header {
-        max-width: 100%;
-        margin: 0;
-        padding: 40px 40px 30px;
-    }
-}
-
-.sidebar header {
-    text-align: left;
-}
-
-@media (min-width: 960px) {
-    .sidebar header 
-    .logo {
-        opacity: 70%;
-    }
-}
-
-.sidebar header
-.logo {
-    display: block;
-    margin-bottom: 15px;
-}
-
-.sidebar header
-.logo:hover {
-    opacity: 100%;
-}
-
-.sidebar a {
-    color: inherit;
-    text-decoration: underline;
-}
-
-.sidebar header 
-.team-logo {
-    fill: currentColor;
-    color: inherit;
-    width: 64px;
-    height: auto;
-}
-
-@media (max-height: 850px) {
-    .sidebar header h1 {
-        font-size: 25px;
-        line-height: 30px;
-    }
-}
-
-@media (min-width: 960px) {
-    .sidebar header h1 {
-        display: block;
-        padding-right: 30px;
-    }
-}
-
-.sidebar header h1 {
-    color: inherit;
-    font: bold 25px/38px 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-@media (min-width: 960px) {
-    .sidebar 
-    .background {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        flex-grow: 1;
-    }
-}
-
-.sidebar
-.background
-.background-image {
-    background-image: url(./assets/bg-img.png);
-    flex-grow: 1;
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    background-size: cover;
-}
-
-.sidebar
-.background
-.background-attribution {
-    font-size: 14px;
-    line-height: 14px;
-    color: inherit;
-    padding: 25px 40px 35px;
-    margin: 0;
-}
-
-p {
-    font: normal 14px/20px 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #000;
-    margin: 20px 0 0;
-}
-
-@media (min-width: 960px) {
-    .content {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        overflow: auto;
-    }
-}
-
-.content {
+.background-vid {
+    height: 100%;
     width: 100%;
-}
-
-@media (min-width: 960px) {
-    main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
-        margin: 0;
-        padding: 0;
-    }
-}
-
-@media (min-width: 960px) {
-    .login-content {
-        padding: 30px 60px 0;
-        margin: 0;
-    }
+	z-index: 0;
 }
 
 .login-content {
-    width: 100%;
-    max-width: 416px;
-    margin: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 100px;
 }
 
-h2 {
-    font: bold 24px/29px 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin-bottom: 26px;
+.login-content
+.login-box {
+    position: absolute;
+    background-image: url(./assets/blur-box.png);
+    z-index: 1;
+    margin-top: 140px;
+    width: 496px;
+    height: 480px;
+}
+
+.login-content main{
+    position: absolute;
+    z-index: 2;
+    text-align: left;
+    margin-top: 215px;
+    margin-left: 75px;
+    width: 496px;
+}
+
+.login-content h3 {
+    font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 15pt;
+    color: #3a2e65;
+    animation-name: anim-float-in;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1.5s;
+}
+
+.login-content h2 {
+    font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 48pt;
+    font-weight: bold;
+    color: #3a2e65;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    animation-name: anim-float-in;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
 }
 
 form fieldset {
     margin: 0 0 12px;
+    animation-name: anim-float-in;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
 }
 
 label {
     display: block;
-    font: bold 15px/24px 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin: 14px 0 4px;
-    color: #0d0c22;
+    font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    margin: 4px 0 6px;
+    color: #3a2e65;
 }
 
 input.text-input {
     width: 100%;
+    max-width: 340px;
     margin-right: 8px;
 }
 
@@ -220,13 +132,6 @@ input[type='password'] {
     border: 1px solid transparent;
 }
 
-@media (min-width: 768px) {
-    input[type='text'],
-    input[type='password'] {
-        font-size: 14px;
-    }
-}
-
 input[type='text'], 
 input[type='password'] {
     font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -234,69 +139,69 @@ input[type='password'] {
     font-weight: 400;
     line-height: 24px;
     width: 100%;
-    -webkit-box-sizing: border-box;
+    max-width: 340px;
     box-sizing: border-box;
     height: 40px;
     padding: 10px 16px;
     outline: none;
-    border-radius: 8px;
-    -webkit-transition: background-color 200ms ease, outline 200ms ease, color 200ms ease, -webkit-box-shadow 200ms ease;
-    transition: background-color 200ms ease, outline 200ms ease, color 200ms ease, -webkit-box-shadow 200ms ease;
+    border-radius: 4px;
     transition: background-color 200ms ease, outline 200ms ease, color 200ms ease, box-shadow 200ms ease;
-    transition: background-color 200ms ease, outline 200ms ease, color 200ms ease, box-shadow 200ms ease, -webkit-box-shadow 200ms ease;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
-    color: #0d0c22;
-    background-color: #f3f3f4;
+    color: #3a2e65;
+    background-color: #eeeef0;
 }
 
 input:hover[type='text'],
 input:hover[type='password'] {
     background-color: #fff;
     border-color: rgba(0,0,0,0.1);
-    -webkit-box-shadow: 0 0 0 4px rgba(234,76,137,0.1);
-    box-shadow: 0 0 0 4px rgba(234,76,137,0.1);
+    box-shadow: 0 0 0 4px #3a2e6513;
 }
 
-@media (min-width: 960px) {
-    input.button {
-        max-width: 200px;
-    }
-}
-
-input.button {
+input.btn-form-sub {
     display: block;
     width: 100%;
-    margin-top: 22px;
+    max-width: 160px;
+    margin-top: 24px;
+    animation-name: anim-float-out;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1.5s;
 }
 
-.form-sub {
-    color: #ffffff;
-    display: inline-block;
-    padding: 10px 16px;
-    cursor: pointer;
-    border: none;
-    text-decoration: none;
-    background: #ea4c89;
-    -webkit-transition: all 200ms ease;
-    transition: all 200ms ease;
-    border-radius: 8px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    position: relative;
-    outline: none;
+.btn-form-sub {
     font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
     height: 40px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    color: #ffffff;
+    padding: 10px 16px;
+    cursor: pointer;
+    border: none;
     text-align: center;
+    background-size: 300% 100%;
+    background-image: linear-gradient(to right, #e47971, #fcb36b, #fcb36b, #fca956);
+    border-radius: 50px;
 }
 
-.form-sub:hover {
-    opacity: 80%;
+.btn-form-sub:hover {
+    background-position: 100% 0;
+    transition: all 400ms ease-in-out;
+}
+
+.btn-form-sub:hover {
+    background-image: linear-gradient(to right, #e47971, #e47971, #fcb36b, #e68079);
+    box-shadow: 0 4px 15px 0 #fcb46bce;
+}
+
+@keyframes anim-float-in {
+    from { transform: translate(0,  12px); }
+    50%  { transform: translate(0, -8px); }
+    to   { transform: translate(0, 0px); }    
+}
+
+@keyframes anim-float-out {
+   from { transform: translate(0,  -12px); }
+    50%  { transform: translate(0, 8px); }
+    to   { transform: translate(0, 0px); }     
 }

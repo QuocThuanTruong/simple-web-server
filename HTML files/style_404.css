@@ -1,0 +1,79 @@
+html, body {
+    height: 100%;
+}
+
+html, body, div, h1, h2, h3 {
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body {
+    font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 62.5%;
+    color: #0d0c22;
+    background: #3a2e65;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;   
+}
+
+.background-vid {
+    height: 100%;
+    width: 100%;
+	z-index: 0;
+}
+
+.notfound-content {
+    display: flex;
+    flex-direction: row;
+    margin-left: 100px;
+}
+
+.notfound-content main{
+    position: absolute;
+    z-index: 2;
+    text-align: left;
+    margin-top: 215px;
+    margin-left: 0px;
+    width: 496px;
+}
+
+.notfound-content h3 {
+    font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 50pt;
+    color: #ffffff;
+    animation-name: anim-float-in;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1.5s;
+}
+
+.notfound-content h2 {
+    font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 92pt;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    animation-name: anim-float-in;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
+}
+
+@keyframes anim-float-in {
+    from { transform: translate(0,  12px); }
+    50%  { transform: translate(0, -8px); }
+    to   { transform: translate(0, 0px); }    
+}
+
+@keyframes anim-float-out {
+   from { transform: translate(0,  -12px); }
+    50%  { transform: translate(0, 8px); }
+    to   { transform: translate(0, 0px); }     
+}
