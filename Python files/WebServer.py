@@ -72,7 +72,7 @@ class WebServer:
 
         data = client_socket.recv(PACKET_SIZE).decode()                                 #Receive data from client_socket
 
-        #Not exist data -> end func _handle_client_request
+        #Not exist data --> end func _handle_client_request
         if not data:
             return
 
@@ -81,12 +81,12 @@ class WebServer:
 
         if method_request == "GET":
             file_requested = data.split(' ')[1]
-            file_requested = file_requested.split('?')[0]                               #Ignore ?xxx if have
+            file_requested = file_requested.split('?')[0]                               #Ignore string query if have
 
             if file_requested == '/':
                 file_requested = "/index.html" 
         elif method_request == "POST":
-            pattern = r"(?:username=)(?P<username>.+)(?:&password=)(?P<password>.+)"
+            pattern = r"(?:username=)(?P<username>.*)(?:&password=)(?P<password>.*)"
             match = re.search(pattern, data)
             
             if match:
@@ -96,7 +96,6 @@ class WebServer:
                 else:
                     file_requested = "/404.html"
                     location = "404.html"
-            pass
                     
         #Open file_requested to get data_response and create response_header
         try:

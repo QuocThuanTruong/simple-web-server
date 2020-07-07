@@ -1,4 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-    <h1>Information</h1>
+
+<head>
+    <meta charset="utf-8">
+    <title>Project Socket</title>
+    <link rel="stylesheet" href="style_info.css">
+    <link rel="icon" type="image/png" href="./assets/favicon.jpg" />
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.7.2.js"></script>
+</head>
+
+<body>
+    <div class="info-title">
+        <div class="grass"></div>
+        <div class="info-title-content">
+            <main>
+                <h2>Members</h2>
+                <h2>Infomation</h2>
+                <h3 class="sub-title">You've just login successfully.</br>
+                    Now you can see members detail </br>information by click explore button below.</h3>
+                <input class="btn-form-sub" type="button" value="Explore" onclick="scrollToMain()">                   
+            </main>
+            <div class="info-title-box"></div>
+        </div>
+        <video autoplay muted loop class="background-vid-title">
+            <source src="./assets/bg-login.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="info-sep"></div>
+    <div class="info-main">
+        <div class="info-main-content">
+            <div class="info-content info-member-1">
+                <a class="member-avt-link" href="https://www.facebook.com/th.coconut" target="_blank"><img class="member-avt revealOnScroll animated floatLeft" data-animation="floatLeft" src="./assets/avt-mem-1.jpg" alt="Avatar"></a>
+                <div class="info-content-detail">
+                    <h2 class="revealOnScroll animated floatIn" data-animation="floatIn">Trương Quốc Thuận</h2>
+                    <svg class="ic-id revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14.28"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-id</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M0,3V14.28H17V3Zm3,7.47a2,2,0,0,1,2-2,1,1,0,1,1,1-1,1,1,0,0,1-1,1,2,2,0,0,1,2,2Zm10,.66H9.3v-1H13Zm1-2H9.3v-1H14Zm0-2H9.3v-1H14Z"/><rect class="cls-1" x="7.5" width="1.99" height="1.99"/></g></g></svg>
+                    <h3 class="detail-id revealOnScroll animated floatInSlow" data-animation="floatInSlow">18120583</h3>
+                    <svg class="ic-univ revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.61 12.89"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-univ</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M4,5.89v4.35c0,.87,2.83,2.21,6.32,2.21s6.31-1.34,6.31-2.21V5.89L10.31,8.14Z"/><path class="cls-1" d="M3.49,11.53V4.8H2.75v6.73a.74.74,0,0,0-.36.63.73.73,0,0,0,.73.73.73.73,0,0,0,.37-1.36Z"/><path class="cls-1" d="M9.59,3.43a.75.75,0,0,1,.71-.52.77.77,0,1,1-.59,1.24l-5.86.91,6.45,2.3L20.61,3.68,10.31,0,0,3.68l2.39.85Z"/></g></g></svg>
+                    <h3 class="detail-univ revealOnScroll animated floatInSlow" data-animation="floatInSlow">University of Science</h3>
+                    <svg class="ic-loc revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 15"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-loc</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M5.5,0A5.27,5.27,0,0,0,0,5,4.69,4.69,0,0,0,.66,7.38L5.2,14.84a.36.36,0,0,0,.6,0l4.54-7.47A4.63,4.63,0,0,0,11,5,5.27,5.27,0,0,0,5.5,0Zm0,7.5A2.63,2.63,0,0,1,2.75,5,2.63,2.63,0,0,1,5.5,2.5,2.63,2.63,0,0,1,8.25,5,2.63,2.63,0,0,1,5.5,7.5Z"/></g></g></svg>
+                    <h3 class="detail-fb revealOnScroll animated floatInSlow" data-animation="floatInSlow">Ho Chi Minh City</h3>
+                </div>
+            </div>
+            <div class="info-content info-member-2">
+                <a class="member-avt-link" href="www.facebook.com/tranght111" target="_blank"><img class="member-avt revealOnScroll animated floatLeft" data-animation="floatLeft" src="./assets/avt-mem-2.jpg" alt="Avatar"></a>
+                <div class="info-content-detail">
+                    <h2 class="revealOnScroll animated floatIn" data-animation="floatIn">Hoàng Thị Thùy Trang</h2>
+                    <svg class="ic-id revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14.28"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-id</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M0,3V14.28H17V3Zm3,7.47a2,2,0,0,1,2-2,1,1,0,1,1,1-1,1,1,0,0,1-1,1,2,2,0,0,1,2,2Zm10,.66H9.3v-1H13Zm1-2H9.3v-1H14Zm0-2H9.3v-1H14Z"/><rect class="cls-1" x="7.5" width="1.99" height="1.99"/></g></g></svg>
+                    <h3 class="detail-id revealOnScroll animated floatInSlow" data-animation="floatInSlow">18120605</h3>
+                    <svg class="ic-univ revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.61 12.89"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-univ</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M4,5.89v4.35c0,.87,2.83,2.21,6.32,2.21s6.31-1.34,6.31-2.21V5.89L10.31,8.14Z"/><path class="cls-1" d="M3.49,11.53V4.8H2.75v6.73a.74.74,0,0,0-.36.63.73.73,0,0,0,.73.73.73.73,0,0,0,.37-1.36Z"/><path class="cls-1" d="M9.59,3.43a.75.75,0,0,1,.71-.52.77.77,0,1,1-.59,1.24l-5.86.91,6.45,2.3L20.61,3.68,10.31,0,0,3.68l2.39.85Z"/></g></g></svg>
+                    <h3 class="detail-univ revealOnScroll animated floatInSlow" data-animation="floatInSlow">University of Science</h3>
+                   <svg class="ic-loc revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 15"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-loc</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M5.5,0A5.27,5.27,0,0,0,0,5,4.69,4.69,0,0,0,.66,7.38L5.2,14.84a.36.36,0,0,0,.6,0l4.54-7.47A4.63,4.63,0,0,0,11,5,5.27,5.27,0,0,0,5.5,0Zm0,7.5A2.63,2.63,0,0,1,2.75,5,2.63,2.63,0,0,1,5.5,2.5,2.63,2.63,0,0,1,8.25,5,2.63,2.63,0,0,1,5.5,7.5Z"/></g></g></svg>
+                    <h3 class="detail-fb revealOnScroll animated floatInSlow" data-animation="floatInSlow">Ho Chi Minh City</h3>
+                </div>
+            </div>
+            <div class="info-content info-member-3">
+                <a class="member-avt-link" href="https://www.facebook.com/profile.php?id=100009569990401" target="_blank"><img class="member-avt revealOnScroll animated floatLeft" data-animation="floatLeft" src="./assets/avt-mem-3.jpg" alt="Avatar"></a>
+                <div class="info-content-detail">
+                    <h2 class="revealOnScroll animated floatIn" data-animation="floatIn">Đặng Thị Hồng Xuyên</h2>
+                    <svg class="ic-id revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14.28"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-id</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M0,3V14.28H17V3Zm3,7.47a2,2,0,0,1,2-2,1,1,0,1,1,1-1,1,1,0,0,1-1,1,2,2,0,0,1,2,2Zm10,.66H9.3v-1H13Zm1-2H9.3v-1H14Zm0-2H9.3v-1H14Z"/><rect class="cls-1" x="7.5" width="1.99" height="1.99"/></g></g></svg>
+                    <h3 class="detail-id revealOnScroll animated floatInSlow" data-animation="floatInSlow">18120659</h3>
+                    <svg class="ic-univ revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.61 12.89"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-univ</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M4,5.89v4.35c0,.87,2.83,2.21,6.32,2.21s6.31-1.34,6.31-2.21V5.89L10.31,8.14Z"/><path class="cls-1" d="M3.49,11.53V4.8H2.75v6.73a.74.74,0,0,0-.36.63.73.73,0,0,0,.73.73.73.73,0,0,0,.37-1.36Z"/><path class="cls-1" d="M9.59,3.43a.75.75,0,0,1,.71-.52.77.77,0,1,1-.59,1.24l-5.86.91,6.45,2.3L20.61,3.68,10.31,0,0,3.68l2.39.85Z"/></g></g></svg>
+                    <h3 class="detail-univ revealOnScroll animated floatInSlow" data-animation="floatInSlow">University of Science</h3>
+                   <svg class="ic-loc revealOnScroll animated floatInSlow" data-animation="floatInSlow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 15"><defs><style>.cls-1{fill:#fff;}</style></defs><title>ic-loc</title><g id="Layer_2" data-name="Layer 2"><g id="info"><path class="cls-1" d="M5.5,0A5.27,5.27,0,0,0,0,5,4.69,4.69,0,0,0,.66,7.38L5.2,14.84a.36.36,0,0,0,.6,0l4.54-7.47A4.63,4.63,0,0,0,11,5,5.27,5.27,0,0,0,5.5,0Zm0,7.5A2.63,2.63,0,0,1,2.75,5,2.63,2.63,0,0,1,5.5,2.5,2.63,2.63,0,0,1,8.25,5,2.63,2.63,0,0,1,5.5,7.5Z"/></g></g></svg>
+                    <h3 class="detail-fb revealOnScroll animated floatInSlow" data-animation="floatInSlow">Ho Chi Minh City</h3>
+                </div>
+            </div>
+        </div>
+        <video autoplay muted loop class="background-vid-main">
+            <source src="./assets/bg-info-main.mp4" type="video/mp4">
+        </video>
+    </div>
+    <script>
+       function scrollToMain() {
+                $('html, body').animate({
+                    scrollTop: $("div.info-main").offset().top
+                }, 1200)
+       }
+    </script>
+    <script>
+        $(function () {
+
+                var $window = $(window),
+                    win_height_padded = $window.height() * 1.1,
+                    isTouch = Modernizr.touch;
+
+                if (isTouch) { $('.revealOnScroll').addClass('animated'); }
+
+                $window.on('scroll', revealOnScroll);
+
+                function revealOnScroll() {
+                    var scrolled = $window.scrollTop(),
+                        win_height_padded = $window.height() * 1.1;
+
+                    // Show animation
+                    $(".revealOnScroll:not(.animated)").each(function () {
+                        var $this = $(this),
+                            offsetTop = $this.offset().top;
+
+                        if (scrolled + win_height_padded > offsetTop) {
+                            
+                                $this.addClass('animated ' + $this.data('animation'));
+                            
+                        }
+                    });
+                    // Hide animation
+                    $(".revealOnScroll.animated").each(function (index) {
+                        var $this = $(this),
+                            offsetTop = $this.offset().top;
+                        if (scrolled + win_height_padded < offsetTop) {
+                            $(this).removeClass('animated floatIn floatInSlow floatLeft');
+                        }
+                    });
+                }
+
+                revealOnScroll();
+            });
+    </script>
+</body>
+
 </html>
