@@ -2,6 +2,7 @@ import socket
 import time
 import threading
 import re
+import os
 
 """
 Simple HTTP Web Server.
@@ -19,7 +20,7 @@ class WebServer:
         self._host = socket.gethostname() 
         self._addr = socket.gethostbyname(self._host)
         self._port =  port
-        self._server_directory = 'D:\\Deadlines\\Semester II_2\\MMT\\TH\\De_bai_Socket_CQ\\Work\\Web Server\\HTML files'              #Current dir stored server files
+        self._server_directory = os.getcwd() + '\\HTML files'                           #Current dir stored server files
 
     """
     Create socket server using IPv4 and TCP.
@@ -37,15 +38,9 @@ class WebServer:
         except Exception as e:
             print(f"Failed to bind server on port {self._port}.")
             print(e)
-            self.shutdown()
+            self._server_socket.shutdown(socket.SHUT_WR)
 
         self._listen()                                                                  #Listen to connection
-
-    """
-    Shut down the server.
-    """
-    def shutdown(self):
-        self._server_socket.shutdown(socket.SHUT_WR)
 
     """
     Listen to client's connection.
@@ -58,7 +53,6 @@ class WebServer:
             (client_socket, client_addr) = self._server_socket.accept()
             print(f"Connection from {client_addr} has been established.")
             threading.Thread(target = self._handle_client_request, args = (client_socket, client_addr)).start()
-
     """
     Get client request and handle, reponse it.
     @params
@@ -69,14 +63,14 @@ class WebServer:
         DEFAULT_USERNAME = "admin"
         DEFAULT_PASSWORD = "admin"
         PACKET_SIZE = 4096
-
+        
         data = client_socket.recv(PACKET_SIZE).decode()                                 #Receive data from client_socket
 
         #Not exist data --> end func _handle_client_request
         if not data:
             return
 
-        #Split data to get file_requested
+        #Split data to get method and file_requested
         method_request = data.split(' ')[0]
 
         if method_request == "GET":
@@ -86,7 +80,7 @@ class WebServer:
             if file_requested == '/':
                 file_requested = "/index.html" 
         elif method_request == "POST":
-            pattern = r"(?:username=)(?P<username>.*)(?:&password=)(?P<password>.*)"
+            pattern = r"(?:username=)(?P<username>.*)(?:&password=)(?P<password>.*)"    #Get username and password from POST request
             match = re.search(pattern, data)
             
             if match:
@@ -107,9 +101,9 @@ class WebServer:
                 file_response_client = open(self._server_directory + file_requested, 'rb')
                 data_response = file_response_client.read()
                 response_header = self._create_response_header(301, location)
-                pass
-
-        except:
+        
+        #If can not open file_requested
+        except:                                                         
             file_response_client = open(self._server_directory + "/404.html", 'rb')
             data_response = file_response_client.read()
             response_header = self._create_response_header(404) 
@@ -127,7 +121,7 @@ class WebServer:
         client_socket.close()
 
     """
-    Create HTTP general header - applying to both requests and responses (no relation to data).
+    Create HTTP general header (no relation to data).
     Supported response code: 200, 301, 404
     @params
         response_code   HTTP response code in header
