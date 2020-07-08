@@ -20,7 +20,7 @@ class WebServer:
         self._host = socket.gethostname() 
         self._addr = socket.gethostbyname(self._host)
         self._port =  port
-        self._server_directory = os.getcwd() + '\\HTML files'                           #Current dir stored server files
+        self._server_directory = os.getcwd().split('\\Python files')[0] + '\\HTML files'                           #Current dir stored server files
 
     """
     Create socket server using IPv4 and TCP.
