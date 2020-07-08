@@ -20,7 +20,7 @@ class WebServer:
         self._host = socket.gethostname() 
         self._addr = socket.gethostbyname(self._host)
         self._port =  port
-        self._server_directory = os.getcwd() + '\\HTML files'                           #Current dir stored server files
+        self._server_directory = os.getcwd().split('\\Python files')[0] + '\\HTML files'                           #Current dir stored server files
 
     """
     Create socket server using IPv4 and TCP.
@@ -63,6 +63,7 @@ class WebServer:
         DEFAULT_USERNAME = "admin"
         DEFAULT_PASSWORD = "admin"
         PACKET_SIZE = 4096
+        location = None
         
         data = client_socket.recv(PACKET_SIZE).decode()                                 #Receive data from client_socket
 
@@ -79,10 +80,15 @@ class WebServer:
 
             if file_requested == '/':
                 file_requested = "/index.html" 
+                location = "index.html"
+                response_code = 301
+            else:
+                response_code = 200
         elif method_request == "POST":
             pattern = r"(?:username=)(?P<username>.*)(?:&password=)(?P<password>.*)"    #Get username and password from POST request
             match = re.search(pattern, data)
             
+            #If username and password are correct --> redirect to info.html Else redirect to 404.html
             if match:
                 if match.group("username") == DEFAULT_USERNAME and match.group("password") == DEFAULT_PASSWORD:   
                     file_requested = "/info.html"
@@ -90,23 +96,21 @@ class WebServer:
                 else:
                     file_requested = "/404.html"
                     location = "404.html"
+
+                response_code = 301
                     
         #Open file_requested to get data_response and create response_header
         try:
-            if method_request == "GET":
-                file_response_client = open(self._server_directory + file_requested, 'rb')
-                data_response = file_response_client.read()
-                response_header = self._create_response_header(200)
-            elif method_request == "POST":
-                file_response_client = open(self._server_directory + file_requested, 'rb')
-                data_response = file_response_client.read()
-                response_header = self._create_response_header(301, location)
+            file_response_client = open(self._server_directory + file_requested, 'rb')
+            data_response = file_response_client.read()
+            response_header = self._create_response_header(response_code, location)
         
         #If can not open file_requested
-        except:                                                         
+        except:  
+            response_code = 404
             file_response_client = open(self._server_directory + "/404.html", 'rb')
             data_response = file_response_client.read()
-            response_header = self._create_response_header(404) 
+            response_header = self._create_response_header(response_code)
 
         finally:
             file_response_client.close()
@@ -152,6 +156,9 @@ class WebServer:
         header += "Connection: close\r\n\n"
         
         return header
+"""
+    End class Web Server
+"""
 
 if __name__ == "__main__":
     web_server = WebServer(80)
